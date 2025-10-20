@@ -28,7 +28,7 @@ class ModulesGenerateCommand extends AbstractCommand {
 	 * Execute the console command.
 	 * @return void
 	 */
-	public function fire()
+	public function handle()
 	{
 		// Name of new module
 		$module     = $this->getModule($this->input->getArgument('module'));

@@ -27,7 +27,7 @@ class ModulesCommand extends AbstractCommand {
 	 * Execute the console command.
 	 * @return void
 	 */
-	public function fire()
+	public function handle()
 	{
 		// Return error if no modules found
 		if (count($this->getModules()) == 0)

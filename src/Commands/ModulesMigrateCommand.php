@@ -40,7 +40,7 @@ class ModulesMigrateCommand extends AbstractCommand {
 	 *
 	 * @return void
 	 */
-	public function fire()
+	public function handle()
 	{
 		$this->info('Migrating modules');
 

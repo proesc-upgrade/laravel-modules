@@ -1,6 +1,6 @@
-# Modules in Laravel 5.0
+# Modules in Laravel 5.1
 
-Application specific modules in Laravel 5.0 can be enabled by adding the following to your **"composer.json"** file:
+Application specific modules in Laravel 5.1 can be enabled by adding the following to your **"composer.json"** file:
 
     "require": {
         "creolab/laravel-modules": "dev-master"

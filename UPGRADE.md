@@ -1,13 +1,13 @@
-# Upgrade Guide - Laravel 4.2 para Laravel 5.0
+# Upgrade Guide - Laravel 4.2 para Laravel 5.1
 
-Este documento descreve as mudanças realizadas no pacote `creolab/laravel-modules` para torná-lo compatível com Laravel 5.0.
+Este documento descreve as mudanças realizadas no pacote `creolab/laravel-modules` para torná-lo compatível com Laravel 5.1.
 
 ## Mudanças Principais
 
 ### 1. Composer.json
-- Atualizada versão do Laravel de `~4` para `5.0.*`
-- Atualizada versão mínima do PHP de `>=5.3.0` para `>=5.4.0`
-- Atualizada descrição do pacote para "Laravel 5"
+- Atualizada versão do Laravel de `~4` para `5.1.*`
+- Atualizada versão mínima do PHP de `>=5.3.0` para `>=5.5.9`
+- Atualizada descrição do pacote para "Laravel 5.1"
 
 ### 2. ServiceProvider.php
 - Substituído `$this->package()` por `$this->publishes()` e `$this->mergeConfigFrom()`
@@ -23,6 +23,9 @@ Este documento descreve as mudanças realizadas no pacote `creolab/laravel-modul
 - Mantida compatibilidade com o construtor
 
 ### 5. Commands
+- **Todos os comandos (Laravel 5.1)**:
+  - Substituído método `fire()` por `handle()` em todos os comandos (ModulesCommand, ModulesScanCommand, ModulesCreateCommand, ModulesPublishCommand, ModulesMigrateCommand, ModulesSeedCommand, ModulesGenerateCommand)
+  
 - **AbstractCommand.php**: 
   - Atualizado método `displayModules()` para usar `$this->table()` ao invés do helper de tabela do Symfony
   - Substituído `app()->make('path.base')` por `base_path()`
@@ -104,16 +107,17 @@ Todos os comandos permanecem os mesmos:
 ## Compatibilidade
 
 Este pacote agora é compatível com:
-- Laravel 5.0.*
-- PHP >= 5.4.0
+- Laravel 5.1.*
+- PHP >= 5.5.9
 
 ## Notas Importantes
 
 1. O método `$app->share()` foi deprecado no Laravel 5.0 e substituído por `$app->singleton()`
 2. O método `$this->package()` foi removido no Laravel 5.0 e substituído por `publishes()` e `mergeConfigFrom()`
-3. Helpers de path foram atualizados para usar as funções globais do Laravel 5.0
-4. A notação de configuração de pacotes mudou de `package::config` para `config`
-5. O método `table()` de comandos foi simplificado no Laravel 5.0
+3. O método `fire()` dos comandos foi substituído por `handle()` no Laravel 5.1
+4. Helpers de path foram atualizados para usar as funções globais do Laravel 5.0+
+5. A notação de configuração de pacotes mudou de `package::config` para `config`
+6. O método `table()` de comandos foi simplificado no Laravel 5.0
 
 ## Troubleshooting
 
@@ -122,6 +126,9 @@ Execute `php artisan vendor:publish` para publicar a configuração.
 
 ### Erro: "Undefined method publishes"
 Certifique-se de que está usando Laravel 5.0 ou superior.
+
+### Erro: "Call to undefined method fire()"
+Este erro ocorre se você estiver usando Laravel 5.1+. Certifique-se de que todos os comandos usam `handle()` ao invés de `fire()`.
 
 ### Módulos não são carregados
 Verifique se o diretório de módulos está no autoload do `composer.json` e execute `composer dump-autoload`.

@@ -34,7 +34,7 @@ class ModulesScanCommand extends AbstractCommand {
 	 * Execute the console command.
 	 * @return void
 	 */
-	public function fire()
+	public function handle()
 	{
 		$this->info('Scanning modules');
 
