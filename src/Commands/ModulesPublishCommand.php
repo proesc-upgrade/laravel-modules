@@ -42,21 +42,21 @@ class ModulesPublishCommand extends AbstractCommand {
 			{
 				if ($this->app['files']->exists($module->path('assets')))
 				{
-					// Group path
-					$groupPath = $module->def('group') ? str_replace('/', '_', $module->def('group')) : null;
+				// Group path
+				$groupPath = $module->def('group') ? str_replace('/', '_', $module->def('group')) : null;
 
-					// Prepare params
-					$path = ltrim(str_replace(app()->make('path.base'), '', $module->path()), "/") . "/assets";
+				// Prepare params
+				$path = ltrim(str_replace(base_path(), '', $module->path()), "/") . "/assets";
 
-					// Get destination path
-					if (is_array($this->app['config']->get('modules::path')))
-					{
-						$destination = app()->make('path.public') . '/packages/module/' . $groupPath . '/' . $module->name() . '/assets';
-					}
-					else
-					{
-						$destination = app()->make('path.public') . '/packages/module/' . $module->name() . '/assets';
-					}
+				// Get destination path
+				if (is_array($this->app['config']->get('modules.path')))
+				{
+					$destination = public_path() . '/packages/module/' . $groupPath . '/' . $module->name() . '/assets';
+				}
+				else
+				{
+					$destination = public_path() . '/packages/module/' . $module->name() . '/assets';
+				}
 
 					// Try to copy
 					$success = $this->app['files']->copyDirectory($path, $destination);

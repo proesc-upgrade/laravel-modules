@@ -89,7 +89,7 @@ class Module extends \Illuminate\Support\ServiceProvider {
 	public function readDefinition()
 	{
 		// Read mode from configuration
-		$mode = $this->app['config']->get('modules::mode');
+		$mode = $this->app['config']->get('modules.mode');
 
 		if ($mode == 'auto' or ($mode == 'manifest' and ! $this->app['modules']->manifest()))
 		{
@@ -136,15 +136,12 @@ class Module extends \Illuminate\Support\ServiceProvider {
 	{
 		if ($this->enabled)
 		{
-			// Register module as a package
-			$this->package('modules/' . $this->name, $this->name, $this->path());
-
 			// Register service provider
 			$this->registerProviders();
 
 			// Get files for inclusion
 			$moduleInclude = (array) array_get($this->definition, 'include');
-			$globalInclude = $this->app['config']->get('modules::include');
+			$globalInclude = $this->app['config']->get('modules.include');
 			$include       = array_merge($globalInclude, $moduleInclude);
 
 			// Include all of them if they exist

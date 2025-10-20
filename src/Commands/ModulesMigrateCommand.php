@@ -61,7 +61,7 @@ class ModulesMigrateCommand extends AbstractCommand {
 				if ($this->app['files']->exists($module->path('migrations')))
 				{
 					// Prepare params
-					$path  = ltrim(str_replace(app()->make('path.base'), '', $module->path()), "/") . "/migrations";
+					$path  = ltrim(str_replace(base_path(), '', $module->path()), "/") . "/migrations";
 					$_info = array('path' => $path);
 
 					// Add to migration list
@@ -104,7 +104,7 @@ class ModulesMigrateCommand extends AbstractCommand {
 	protected function runPathsMigration()
 	{
 		$_fileService = new Filesystem();
-		$_tmpPath     = app_path('storage') . DIRECTORY_SEPARATOR . 'migrations';
+		$_tmpPath     = storage_path() . DIRECTORY_SEPARATOR . 'migrations';
 
 		if (!is_dir($_tmpPath) && !$_fileService->exists($_tmpPath))
 		{

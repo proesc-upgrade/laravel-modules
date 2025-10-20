@@ -1,22 +1,16 @@
-# Abandoned
+# Modules in Laravel 5.0
 
-**This package is no longer maintained.**
-
-I encourage you to use composer packages for your modules to get the most flexibility out of it.
-
-# Modules in Laravel 4
-
-Application specific modules in Laravel 4 can be enabled by adding the following to your **"composer.json"** file:
+Application specific modules in Laravel 5.0 can be enabled by adding the following to your **"composer.json"** file:
 
     "require": {
         "creolab/laravel-modules": "dev-master"
     }
 
-And by adding a new provider to your providers list in **"app/config/app.php"**:
+And by adding a new provider to your providers list in **"config/app.php"**:
     
-    'providers' => array(
-        'Creolab\LaravelModules\ServiceProvider',
-    );
+    'providers' => [
+        Creolab\LaravelModules\ServiceProvider::class,
+    ];
 
 Also you need to add your modules directory to the composer autoloader:
 
@@ -88,9 +82,9 @@ This command scans the modules exactly like in the **"auto"** mode, but caches t
 By default the package scans the **"modules"** directory for **"module.json"** files. This is not the best solution way to discover modules, and I do plan to implement some kind of a caching to the Finder class.
 To optimize the modules Finder even more you can publish the package configuration, and add the modules and definitions directly inside the configuration file by running:
 
-    php artisan config:publish creolab/laravel-modules
+    php artisan vendor:publish
 
-And the editing the file **"app/config/packages/creolab/laravel-modules/config.php"**.
+And the editing the file **"config/modules.php"**.
 You just need to change the **"mode"** parameter from **"auto"** to **"manual"**, and list your modules under the **"modules"** key. An example of that is already provided inside the configuration.
 
 **Note for Manual mode with multiple paths** : Laravel-Modules could not determine witch path to use. So please specify the folder containing the module you want to load. Like this example :

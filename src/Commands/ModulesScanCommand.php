@@ -38,9 +38,6 @@ class ModulesScanCommand extends AbstractCommand {
 	{
 		$this->info('Scanning modules');
 
-		// Get table helper
-		$this->table = $this->getHelperSet()->get('table');
-
 		// Delete the manifest
 		$this->app['modules']->deleteManifest();
 

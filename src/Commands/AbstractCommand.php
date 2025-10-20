@@ -58,7 +58,7 @@ abstract class AbstractCommand extends Command {
 
 		foreach($this->app['modules']->modules() as $name => $module)
 		{
-			$path = str_replace(app()->make('path.base'), '', $module->path());
+			$path = str_replace(base_path(), '', $module->path());
 
 			$results[] = array(
 				'name'    => $name,
@@ -96,14 +96,9 @@ abstract class AbstractCommand extends Command {
 	 */
 	public function displayModules($modules)
 	{
-		// Get table helper
-		$this->table = $this->getHelperSet()->get('table');
-
 		$headers = array('Name', 'Path', 'Order', 'Enabled');
 
-		$this->table->setHeaders($headers)->setRows($modules);
-
-		$this->table->render($this->getOutput());
+		$this->table($headers, $modules);
 	}
 
 	/**

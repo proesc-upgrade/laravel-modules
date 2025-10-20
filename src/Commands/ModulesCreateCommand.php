@@ -38,7 +38,7 @@ class ModulesCreateCommand extends AbstractCommand {
 		if ( ! app('modules')->module($moduleName))
 		{
 			// Get path to modules
-			$modulePath = $this->app['config']->get('modules::path');
+			$modulePath = $this->app['config']->get('modules.path');
 			if (is_array($modulePath)) $modulePath = $modulePath[0];
 			$modulePath .= '/' . $moduleName;
 

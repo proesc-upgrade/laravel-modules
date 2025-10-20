@@ -14,7 +14,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('creolab/laravel-modules', 'modules', __DIR__);
+		// Publish configuration
+		$this->publishes([
+			__DIR__.'/config/config.php' => config_path('modules.php'),
+		], 'config');
 
 		// Register commands
 		$this->bootCommands();
@@ -39,8 +42,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 	 */
 	public function register()
 	{
+		// Merge configuration
+		$this->mergeConfigFrom(__DIR__.'/config/config.php', 'modules');
+
 		// Register IoC bindings
-		$this->app['modules'] = $this->app->share(function($app)
+		$this->app->singleton('modules', function($app)
 		{
 			return new Finder($app, $app['files'], $app['config']);
 		});
@@ -53,43 +59,43 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 	public function bootCommands()
 	{
 		// Add modules command
-		$this->app['modules.list'] = $this->app->share(function($app)
+		$this->app->singleton('modules.list', function($app)
 		{
 			return new Commands\ModulesCommand($app);
 		});
 
 		// Add scan command
-		$this->app['modules.scan'] = $this->app->share(function($app)
+		$this->app->singleton('modules.scan', function($app)
 		{
 			return new Commands\ModulesScanCommand($app);
 		});
 
 		// Add publish command
-		$this->app['modules.publish'] = $this->app->share(function($app)
+		$this->app->singleton('modules.publish', function($app)
 		{
 			return new Commands\ModulesPublishCommand($app);
 		});
 
 		// Add migrate command
-		$this->app['modules.migrate'] = $this->app->share(function($app)
+		$this->app->singleton('modules.migrate', function($app)
 		{
 			return new Commands\ModulesMigrateCommand($app);
 		});
 
 		// Add seed command
-		$this->app['modules.seed'] = $this->app->share(function($app)
+		$this->app->singleton('modules.seed', function($app)
 		{
 			return new Commands\ModulesSeedCommand($app);
 		});
 
 		// Add create command
-		$this->app['modules.create'] = $this->app->share(function($app)
+		$this->app->singleton('modules.create', function($app)
 		{
 			return new Commands\ModulesCreateCommand($app);
 		});
 
 		// Add generate command
-		$this->app['modules.generate'] = $this->app->share(function($app)
+		$this->app->singleton('modules.generate', function($app)
 		{
 			return new Commands\ModulesGenerateCommand($app);
 		});

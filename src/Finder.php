@@ -43,11 +43,11 @@ class Finder {
 	 */
 	public function start()
 	{
-		if ($this->app['config']->get('modules::mode') == 'auto')
+		if ($this->app['config']->get('modules.mode') == 'auto')
 		{
 			$this->app['modules']->scan();
 		}
-		elseif ($this->app['config']->get('modules::mode') == 'manifest')
+		elseif ($this->app['config']->get('modules.mode') == 'manifest')
 		{
 			if ($manifest = $this->manifest->toArray())
 			{
@@ -90,7 +90,7 @@ class Finder {
 	public function scan()
 	{
 		// Get the modules directory paths
-		$modulesPaths = $this->app['config']->get('modules::path');
+		$modulesPaths = $this->app['config']->get('modules.path');
 		if ( ! is_array($modulesPaths)) $modulesPaths = array($modulesPaths);
 
 		// Now prepare an array with all directories
@@ -135,7 +135,7 @@ class Finder {
 
 		else
 		{
-			$moduleGroups = $this->app['config']->get('modules::modules');
+			$moduleGroups = $this->app['config']->get('modules.modules');
 
 			if ($moduleGroups)
 			{
@@ -250,7 +250,7 @@ class Finder {
 	 */
 	public function log($message, $type = 'debug')
 	{
-		if ($this->app['config']->get('modules::debug'))
+		if ($this->app['config']->get('modules.debug'))
 		{
 			$namespace = 'MODULES';
 			$message   = "[$namespace] $message";
