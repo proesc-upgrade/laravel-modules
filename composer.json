@@ -1,7 +1,7 @@
 {
     "name": "creolab/laravel-modules",
     "keywords": ["modules", "laravel"],
-    "description": "Application specific modules in Laravel 5.1",
+    "description": "Application specific modules in Laravel 5.5",
     "homepage": "http://creolab.hr",
     "authors": [
         {
@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "5.1.*"
+        "php": ">=7.0",
+        "laravel/framework": "5.5.*"
     },
     "require-dev": {
         "way/generators": "~2"
