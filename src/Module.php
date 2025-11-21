@@ -140,7 +140,7 @@ class Module extends \Illuminate\Support\ServiceProvider {
 			$this->registerProviders();
 
 			// Get files for inclusion
-			$moduleInclude = (array) array_get($this->definition, 'include');
+			$moduleInclude = (array) data_get($this->definition, 'include', []);
 			$globalInclude = $this->app['config']->get('modules.include');
 			$include       = array_merge($globalInclude, $moduleInclude);
 
