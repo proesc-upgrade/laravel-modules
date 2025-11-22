@@ -23,11 +23,13 @@ class ModuleCollection extends Collection {
 
 	/**
 	 * Initialize a module collection
-	 * @param Application $app
+	 * @param array $items
+	 * @param Application|null $app
 	 */
-	public function __construct(Application $app)
+	public function __construct($items = [], Application $app = null)
 	{
-		$this->app = $app;
+		parent::__construct($items);
+		$this->app = $app ?: app();
 	}
 
 	/**

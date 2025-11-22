@@ -33,7 +33,7 @@ class Finder {
 	public function __construct(Application $app)
 	{
 		$this->app      = $app;
-		$this->modules  = new ModuleCollection($app);
+		$this->modules  = new ModuleCollection([], $app);
 		$this->manifest = new Manifest($app);
 	}
 
