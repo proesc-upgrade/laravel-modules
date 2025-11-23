@@ -48,7 +48,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		// Register IoC bindings
 		$this->app->singleton('modules', function($app)
 		{
-			return new Finder($app, $app['files'], $app['config']);
+			return new Finder($app);
 		});
 	}
 
