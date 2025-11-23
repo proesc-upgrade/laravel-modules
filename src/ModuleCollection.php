@@ -23,13 +23,25 @@ class ModuleCollection extends Collection {
 
 	/**
 	 * Initialize a module collection
-	 * @param array $items
-	 * @param Application|null $app
+	 * @param Application|array $app
 	 */
-	public function __construct($items = [], Application $app = null)
+	public function __construct($app = null)
 	{
-		parent::__construct($items);
-		$this->app = $app ?: app();
+		if (is_array($app)) {
+			parent::__construct($app);
+			// Tenta obter o app do container se disponível
+			if (function_exists('app')) {
+				$this->app = app();
+			}
+		} elseif ($app instanceof Application) {
+			$this->app = $app;
+		} else {
+			parent::__construct([]);
+			// Tenta obter o app do container se disponível
+			if (function_exists('app')) {
+				$this->app = app();
+			}
+		}
 	}
 
 	/**
