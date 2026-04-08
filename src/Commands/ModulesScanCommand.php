@@ -2,7 +2,6 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
-use Illuminate\Foundation\Application;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 

@@ -3,12 +3,6 @@
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
 	/**
-	 * Indicates if loading of the provider is deferred.
-	 * @var bool
-	 */
-	protected $defer = false;
-
-	/**
 	 * Bootstrap the application events.
 	 * @return void
 	 */
@@ -110,15 +104,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			'modules.create',
 			'modules.generate'
 		));
-	}
-
-	/**
-	 * Provided service
-	 * @return array
-	 */
-	public function provides()
-	{
-		return array('Modules');
 	}
 
 }
