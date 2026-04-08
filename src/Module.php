@@ -1,7 +1,7 @@
 <?php namespace Creolab\LaravelModules;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Foundation\Application;
 
 /**
  * Single module definition
@@ -59,9 +59,14 @@ class Module extends \Illuminate\Support\ServiceProvider {
 
 	/**
 	 * Initialize a module
-	 * @param Application $app
+	 *
+	 * @param  string  $name
+	 * @param  Application  $app
+	 * @param  string|null  $path
+	 * @param  array|null  $definition
+	 * @param  string|null  $group
 	 */
-	public function __construct($name, $path = null, $definition = null, Application $app, $group = null)
+	public function __construct($name, Application $app, $path = null, $definition = null, $group = null)
 	{
 		$this->name  = $name;
 		$this->app   = $app;

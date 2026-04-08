@@ -1,6 +1,6 @@
 <?php namespace Creolab\LaravelModules;
 
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Monifest for scanned modules
@@ -33,6 +33,7 @@ class Manifest {
 	public function __construct(Application $app)
 	{
 		$this->app = $app;
+		$this->data = [];
 
 		// Path to manifest file
 		$this->path = storage_path('meta/modules.json');
@@ -40,7 +41,7 @@ class Manifest {
 		// Try to read the file
 		if ($this->app['files']->exists($this->path))
 		{
-			$this->data = @json_decode($this->app['files']->get($this->path), true);
+			$this->data = @json_decode($this->app['files']->get($this->path), true) ?: [];
 		}
 	}
 

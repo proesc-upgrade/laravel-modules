@@ -1,6 +1,6 @@
 <?php namespace Creolab\LaravelModules;
 
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 
 /**

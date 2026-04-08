@@ -1,6 +1,6 @@
 <?php namespace Creolab\LaravelModules;
 
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Module finder
@@ -109,7 +109,7 @@ class Finder {
 						if ($this->app['files']->exists($directory . '/module.json'))
 						{
 							$name                 = pathinfo($directory, PATHINFO_BASENAME);
-							$this->modules[$name] = new Module($name, $directory, null, $this->app, $path);
+							$this->modules[$name] = new Module($name, $this->app, $directory, null, $path);
 						}
 					}
 				}
@@ -175,13 +175,19 @@ class Finder {
 			}  
 
 			// Get group. Manifest mode has group defined on the module.
-			$group = (! is_null($groupPath)) ? $groupPath : $module['group'];
+			if (! is_null($groupPath)) {
+				$group = $groupPath;
+			} elseif (is_array($module) && isset($module['group'])) {
+				$group = $module['group'];
+			} else {
+				$group = null;
+			}
 
 			// The path
 			$path = base_path($group . '/' . $name);
 
 			// Create instance
-			$this->modules[$name] = new Module($name, $path, $definition, $this->app, $group);
+			$this->modules[$name] = new Module($name, $this->app, $path, $definition, $group);
 		}
 	}
 
@@ -267,7 +273,7 @@ class Finder {
 	 */
 	public function prettyJsonEncode($values)
 	{
-		return version_compare(PHP_VERSION, '5.4.0', '>=') ? json_encode($values, JSON_PRETTY_PRINT) : json_encode($values);
+		return json_encode($values, JSON_PRETTY_PRINT);
 	}
 
 }

@@ -1,7 +1,6 @@
 <?php namespace Creolab\LaravelModules\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Composer;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
